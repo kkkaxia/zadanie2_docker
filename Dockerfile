@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --user -r requirements.txt
 
-COPY app ./app
+COPY main.py .
 
 # Etap 2: Finalny obraz
 FROM python:3.12-slim
@@ -16,7 +16,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 COPY --from=builder /root/.local /root/.local
-COPY app ./app
+COPY main.py .
 
 ENV PATH=/root/.local/bin:$PATH
 ENV PORT=8000
